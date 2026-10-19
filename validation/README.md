@@ -23,3 +23,8 @@ Initial run: performance 82, accessibility 97. Changes reduced mobile neural nod
 - JavaScript syntax checks and Git whitespace checks passed.
 
 These are local synthetic results, not production hosting measurements. A physical phone, Safari, Firefox, assistive technology, and actual low-powered hardware have not been tested. Automated accessibility scores do not replace manual accessibility evaluation. Sentinel AI's own backend tests were inspected as source context, not executed in this portfolio task.
+
+## Reliability case study follow-up
+Added source-linked CI gates, isolation and API lifecycle scenarios, deployment topology, operational monitoring, trace privacy limitations, and an engineering challenge walkthrough. CI configuration was read; latest workflow status and numeric code coverage were not claimed. Raw payload persistence was verified in the ingestion source; automatic redaction was not claimed.
+
+Repeated browser interaction checks at 390 x 844: no horizontal overflow; regression Step +1 updated iteration to 001; neural-network tab displayed its panel; animation pause switched to the Play animation state. No console errors were recorded. Desktop reliability layout inspected at 1440 x 1000. The Lighthouse report predates these text additions and has not been rerun for this follow-up. Physical-phone, live-host, and cross-engine tests remain outstanding.
