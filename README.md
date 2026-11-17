@@ -1,6 +1,6 @@
 # Varun S — Portfolio
 
-A static portfolio with Home, About, Services, and a ten-component React demo collection. The visual layout follows the user-selected reference at https://siddz.com/; portfolio details, projects, email, and avatar belong to Varun.
+A static portfolio with Home, About, a 23-page service directory, and a ten-component React demo collection. The visual layout follows the user-selected reference at https://siddz.com/; portfolio details, projects, email, and avatar belong to Varun.
 
 ## Develop
 
@@ -14,7 +14,7 @@ Generated HTML and bundled assets are also committed for static hosts that serve
 
 ## Edit
 
-- `src/home.html`, `src/about.html`, `src/services.html`: page content.
+- `src/home.html`, `src/about.html`, `src/services.mjs`: page content.
 - `scripts/build.mjs`: shared page shell and generated component routes.
 - `src/catalog.json`: component listing and descriptions.
 - `src/demos.jsx`: demos, code/preview UI, installation commands, and prop tables.
@@ -28,7 +28,7 @@ Run `npm run build` after editing source pages or components. The build updates 
 
 Contact: writevarun2006@gmail.com. The contact form opens a prefilled email draft using `mailto:`; the visitor sends it in their email client. It does not claim delivery or depend on an unconfigured server.
 
-GitHub contributions load from github-contributions-api.jogruber.de for varun9087, with a GitHub link if the service is unavailable. Fonts and technology icons are local. No invented visitor count, music history, booking URL, or social account is displayed. Booking and Spotify require Varun's own account integrations.
+GitHub contributions load from github-contributions-api.jogruber.de for varun9087, with a GitHub link if the service is unavailable. Fonts and technology icons are local. No invented visitor count, music history, booking URL, or social account is displayed. Apple Music links to Varun’s supplied profile. Scheduling uses email. The optional real visitor counter requires server storage configuration; see docs/INTEGRATIONS.md.
 
 ## Credits
 

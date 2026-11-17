@@ -1,6 +1,8 @@
+import {services} from '../src/services.mjs';
 import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';
 const catalog=JSON.parse(fs.readFileSync('src/catalog.json'));
 const pages=['index.html','about/index.html','services/index.html','components/index.html',...catalog.map(c=>`components/${c.slug}/index.html`)];
+pages.push(...services.map(s=>`services/${s.slug}/index.html`));
 const output=path.resolve('dist');
 assert(fs.existsSync(path.join(output,'index.html')), 'Run npm run build before checking deployment output');
 for(const file of [...pages,'sentinel.html','assets/demos.js','assets/components.css','assets/cat.png']) {

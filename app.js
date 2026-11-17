@@ -33,3 +33,21 @@ if (visitQuote) {
   visitQuote.textContent = thoughts[selected];
   try { localStorage.setItem('varun-last-quote', String(selected)); } catch {}
 }
+
+async function visitorOrdinal(){
+ const panel=$('.visit-note');if(!panel)return;
+ try{
+  const endpoint='/api/integrations';
+  const status=await fetch(endpoint,{signal:AbortSignal.timeout(5000)});
+  if(!status.ok||!(await status.json()).visitors)return;
+  let visitorId=localStorage.getItem('varun-visitor-id');
+  if(!visitorId){visitorId=crypto.randomUUID();localStorage.setItem('varun-visitor-id',visitorId)}
+  const response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({visitorId}),signal:AbortSignal.timeout(10000)});
+  if(!response.ok)return;const {ordinal}=await response.json();if(!Number.isSafeInteger(ordinal)||ordinal<1)return;
+  const suffix=ordinal%100>=11&&ordinal%100<=13?'th':({1:'st',2:'nd',3:'rd'}[ordinal%10]||'th');
+  const line=document.createElement('span'),number=document.createElement('strong'),sup=document.createElement('sup');
+  number.textContent=ordinal.toLocaleString();sup.textContent=suffix;
+  line.append('You are the ',number,sup,' visitor');panel.replaceChildren(line);
+ }catch{/* Keep the welcome message when storage or the service is unavailable. */}
+}
+visitorOrdinal();
