@@ -19,7 +19,7 @@ function write(file,contents){fs.mkdirSync(path.dirname(file),{recursive:true});
 let home=fs.readFileSync('src/home.html','utf8');write('index.html',page('AI/ML Engineer',home,'home',0));
 write('about/index.html',page('About',fs.readFileSync('src/about.html','utf8'),'about'));
 write('services/index.html',page('Services',serviceIndex()));
-const projects=home.match(/<div class="projects">([\s\S]*?)<\/div><a class="more-project"/)[1];
+const projects=home.match(/<div class="projects">([\s\S]*?)<\/div><\/section>/)[1];
 for(const service of services)write('services/'+service.slug+'/index.html',page(service.title,servicePage(service,'<div class="projects">'+projects+'</div>'),'services',2));
 write('components/index.html',page('Components',`<div class="collection-intro"><div class="badges"><span>10 COMPONENTS</span><span>OPEN SOURCE</span></div><h1>Components</h1><p>Interactive React components with thoughtful motion and small details. Explore the demos, copy the code, and make them your own.</p><div class="collection-benefits"><span>${iconMarkup(CheckCircle2)} Copy &amp; Paste</span><span>${iconMarkup(CheckCircle2)} Tailwind CSS</span><span>${iconMarkup(CheckCircle2)} Interactive</span></div></div><div class="component-grid">${entries.map((c,i)=>`<a class="component-card" href="components/${c.slug}/"><span class="component-icon">${iconMarkup(componentIcons[c.slug])}</span><div><h2>${c.title}${i<3?'<i></i>':''}</h2><p>${c.description}</p></div></a>`).join('')}</div><div class="library-credit"><img src="assets/cat.png" width="40" height="40" alt="Varun's cat"><strong>varun-ui</strong><span>Curated by Varun S</span></div>`,'components'));
 for(const c of entries){
