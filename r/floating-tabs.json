@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "floating-tabs",
+  "type": "registry:component",
+  "title": "Floating Tabs",
+  "description": "A modern tab navigation component featuring a fluid animated background indicator that smoothly transitions between active tabs with spring physics.",
+  "files": [
+    {
+      "path": "siddz-ui/floating-tabs.jsx",
+      "type": "registry:component",
+      "content": "\"use client\";\r\n\r\nimport { useState, useRef, useLayoutEffect } from \"react\";\r\n\r\nexport function FloatingTabs({ tabs, defaultValue, onChange, className = \"\" }) {\r\n  const [activeTab, setActiveTab] = useState(defaultValue || tabs[0]?.value);\r\n  const [indicatorStyle, setIndicatorStyle] = useState({});\r\n  const containerRef = useRef(null);\r\n\r\n  useLayoutEffect(() => {\r\n    updateIndicator();\r\n  }, [activeTab]);\r\n\r\n  const updateIndicator = () => {\r\n    if (containerRef.current) {\r\n      const activeButton = containerRef.current.querySelector(\r\n        `[data-value=\"${activeTab}\"]`\r\n      );\r\n      if (activeButton) {\r\n        const { offsetLeft, offsetWidth } = activeButton;\r\n        setIndicatorStyle({\r\n          left: `${offsetLeft}px`,\r\n          width: `${offsetWidth}px`,\r\n          opacity: 1,\r\n        });\r\n      }\r\n    }\r\n  };\r\n\r\n  const handleTabChange = (value) => {\r\n    setActiveTab(value);\r\n    if (onChange) {\r\n      onChange(value);\r\n    }\r\n  };\r\n\r\n  const activeContent = tabs.find((tab) => tab.value === activeTab)?.content;\r\n\r\n  return (\r\n    <div className={className}>\r\n      <div\r\n        ref={containerRef}\r\n        className=\"relative flex items-center gap-1 p-1 rounded-lg bg-zinc-900/40 border border-zinc-800/50 w-fit\"\r\n      >\r\n        <div\r\n          className=\"absolute h-[calc(100%-8px)] bg-zinc-800 rounded-md transition-all duration-300 ease-out\"\r\n          style={indicatorStyle}\r\n        />\r\n\r\n        {tabs.map((tab) => (\r\n          <button\r\n            key={tab.value}\r\n            data-value={tab.value}\r\n            onClick={() => handleTabChange(tab.value)}\r\n            className={`relative z-10 px-3.5 py-1.5 cursor-pointer rounded-md text-sm font-medium transition-colors duration-200 ${\r\n              activeTab === tab.value ? \"text-zinc-200\" : \"text-zinc-500 hover:text-zinc-300\"\r\n            }`}\r\n          >\r\n            {tab.label}\r\n          </button>\r\n        ))}\r\n      </div>\r\n\r\n      {activeContent && (\r\n        <div className=\"mt-4 animate-in fade-in-0 duration-200\">\r\n          {activeContent}\r\n        </div>\r\n      )}\r\n    </div>\r\n  );\r\n}\r\n\r\n"
+    }
+  ],
+  "dependencies": [
+    "react",
+    "framer-motion",
+    "canvas-confetti"
+  ]
+}

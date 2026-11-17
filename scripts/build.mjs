@@ -1,0 +1,22 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {build} from 'esbuild';
+import {execFileSync} from 'node:child_process';
+await build({entryPoints:['src/demos.jsx'],bundle:true,minify:true,format:'esm',outfile:'assets/demos.js',jsx:'automatic',define:{'process.env.NODE_ENV':'"production"'}});
+execFileSync(process.execPath,['node_modules/@tailwindcss/cli/dist/index.mjs','-i','src/components.css','-o','assets/components.css','--minify'],{stdio:'inherit'});
+const entries=JSON.parse(fs.readFileSync('src/catalog.json','utf8'));
+const header=(active)=>`<header><nav aria-label="Main navigation"><a href="index.html" ${active==='home'?'aria-current="page"':''}>Home</a><a href="about/" ${active==='about'?'aria-current="page"':''}>About</a><a href="components/" ${active==='components'?'aria-current="page"':''}>Components</a></nav><button id="theme" class="icon-button" aria-label="Toggle theme"><svg viewBox="0 0 24 24"><path d="M20 14a8 8 0 0 1-10-10 8 8 0 1 0 10 10Z"/></svg></button></header>`;
+const footer=`<footer><span>© <span id="year">2026</span> Varun S.</span><div><a href="about/">About</a><a href="services/">Services</a><a href="components/">Components</a></div><div><a href="mailto:writevarun2006@gmail.com" aria-label="Email Varun">✉</a><a href="https://github.com/varun9087" aria-label="GitHub">⌘</a></div></footer>`;
+function page(title,body,active='home',depth=1){return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base href="${'../'.repeat(depth)||'./'}"><meta name="theme-color" content="#ffffff"><title>${title} | Varun S</title><meta name="description" content="Varun S — AI/ML engineer, projects, and interactive UI components."><link rel="icon" href="assets/cat.png"><link rel="preload" href="assets/fonts/geist.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="assets/components.css"><link rel="stylesheet" href="style.css"><script src="app.js" defer></script></head><body><a class="skip" href="#main">Skip to content</a><div class="shell">${header(active)}<main id="main">${body}</main>${footer}</div><div id="toast" role="status"></div></body></html>`;}
+function write(file,contents){fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,contents)}
+let home=fs.readFileSync('src/home.html','utf8');write('index.html',page('AI/ML Engineer',home,'home',0));
+write('about/index.html',page('About',fs.readFileSync('src/about.html','utf8'),'about'));
+write('services/index.html',page('Services',fs.readFileSync('src/services.html','utf8')));
+write('components/index.html',page('Components',`<div class="collection-intro"><div class="badges"><span>10 COMPONENTS</span><span>OPEN SOURCE</span></div><h1>Components</h1><p>Interactive React components with thoughtful motion and small details. Explore the demos, copy the code, and make them your own.</p><div class="collection-benefits"><span>⊙ Copy &amp; Paste</span><span>⊙ Tailwind CSS</span><span>⊙ Interactive</span></div></div><div class="component-grid">${entries.map((c,i)=>`<a class="component-card" href="components/${c.slug}/"><span class="component-icon">${c.icon}</span><div><h2>${c.title}${i<3?'<i></i>':''}</h2><p>${c.description}</p></div></a>`).join('')}</div><div class="library-credit"><img src="assets/cat.png" width="40" height="40" alt="Varun's cat"><strong>varun-ui</strong><span>Curated by Varun S</span><small>Components from <a href="https://siddz.com/components">siddz-ui by Siddharth Meena ↗</a></small></div>`,'components'));
+for(const c of entries){
+ const source=fs.readFileSync(`src/components/${c.slug}.jsx`,'utf8');
+ // Distribute the exact locally built source, including accessibility fixes.
+ const registry=JSON.parse(fs.readFileSync(`r/${c.slug}.json`,'utf8'));registry.files[0].content=source;registry.dependencies=['react','framer-motion','canvas-confetti'];write(`r/${c.slug}.json`,JSON.stringify(registry,null,2));
+ write(`components/${c.slug}/index.html`,page(c.title,`<a class="back mono" href="components/">← Back to Components</a><h1 class="detail-title">${c.title}</h1><p class="detail-description">${c.description}</p><div id="component-demo" data-component="${c.slug}"></div><script type="module" src="assets/demos.js"></script>`,'components',2));
+}
+console.log('Built home, about, services, component collection, and 10 component pages.');

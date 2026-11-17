@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "animated-text-slider",
+  "type": "registry:component",
+  "title": "Animated Text Slider",
+  "description": "A smooth vertical text carousel that cycles through multiple text items with elegant slide and fade transitions, perfect for role titles or taglines.",
+  "files": [
+    {
+      "path": "siddz-ui/animated-text-slider.jsx",
+      "type": "registry:component",
+      "content": "\"use client\";\r\nimport { useState, useEffect } from \"react\";\r\n\r\nexport function AnimatedTextSlider({ \r\n  texts = [\"Text 1\", \"Text 2\", \"Text 3\"],\r\n  interval = 3500,\r\n  className = \"\"\r\n}) {\r\n  const [index, setIndex] = useState(0);\r\n\r\n  useEffect(() => {\r\n    const timer = setInterval(() => {\r\n      setIndex((prev) => (prev + 1) % texts.length);\r\n    }, interval);\r\n    return () => clearInterval(timer);\r\n  }, [texts.length, interval]);\r\n\r\n  return (\r\n    <div className={`relative h-[1.5em] overflow-hidden w-full ${className}`}>\r\n      {texts.map((text, i) => {\r\n        const isCurrent = i === index;\r\n        const isPrev = i === (index - 1 + texts.length) % texts.length;\r\n        \r\n        const shouldTransition = isCurrent || isPrev;\r\n        \r\n        let transformClass = \"translate-y-full\";\r\n        let opacityClass = \"opacity-0\";\r\n        \r\n        if (isCurrent) {\r\n          transformClass = \"translate-y-0\";\r\n          opacityClass = \"opacity-100\";\r\n        }\r\n        if (isPrev) {\r\n          transformClass = \"-translate-y-full\";\r\n          opacityClass = \"opacity-0\";\r\n        }\r\n\r\n        return (\r\n          <div \r\n            key={i} \r\n            className={`absolute left-0 w-full ${transformClass} ${opacityClass} ${shouldTransition ? \"transition-all duration-700 ease-in-out\" : \"\"}`}\r\n          >\r\n            {text}\r\n          </div>\r\n        );\r\n      })}\r\n    </div>\r\n  );\r\n}\r\n\r\n"
+    }
+  ],
+  "dependencies": [
+    "react",
+    "framer-motion",
+    "canvas-confetti"
+  ]
+}

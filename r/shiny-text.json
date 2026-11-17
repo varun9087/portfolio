@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "shiny-text",
+  "type": "registry:component",
+  "title": "Shiny Text",
+  "description": "A shimmering text effect that adds a premium, polished feel to your headings or call-to-action buttons with a customizable light reflection animation.",
+  "files": [
+    {
+      "path": "components/siddz-ui/shiny-text.jsx",
+      "type": "registry:component",
+      "content": "\"use client\";\r\n\r\nimport React from \"react\";\r\n\r\nexport function ShinyText({ \r\n  children, \r\n  className = \"\", \r\n  shimmerWidth = 100,\r\n  speed = 5,\r\n  ...props \r\n}) {\r\n  return (\r\n    <span\r\n      style={{\r\n        \"--shiny-width\": `${shimmerWidth}px`,\r\n        \"--shiny-speed\": `${speed}s`,\r\n      }}\r\n      className={`\r\n        siddz-shiny relative inline-block\r\n        text-neutral-600/50 dark:text-neutral-400/60\r\n        bg-clip-text\r\n        bg-no-repeat\r\n        bg-linear-to-r from-transparent via-black/60 via-50% to-transparent dark:via-white/60\r\n        ${className}\r\n      `}\r\n      {...props}\r\n    >\r\n      {children}\r\n      <style>{`\r\n        @keyframes shiny-text {\r\n          0% {\r\n            background-position: calc(-100% - var(--shiny-width)) 0;\r\n          }\r\n          40% {\r\n            background-position: calc(100% + var(--shiny-width)) 0;\r\n          }\r\n          100% {\r\n            background-position: calc(100% + var(--shiny-width)) 0;\r\n          }\r\n        }\r\n        .siddz-shiny {\r\n          animation: shiny-text var(--shiny-speed) infinite ease-in-out;\r\n          background-size: var(--shiny-width) 100%;\r\n        }\r\n      `}</style>\r\n    </span>\r\n  );\r\n}\r\n\r\n\r\n\r\n"
+    }
+  ],
+  "dependencies": [
+    "react",
+    "framer-motion",
+    "canvas-confetti"
+  ]
+}

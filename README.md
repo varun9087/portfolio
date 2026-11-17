@@ -1,47 +1,37 @@
-# Varun S — Portfolio (Version 3)
+# Varun S — Portfolio
 
-Complete editable source of the enhanced portfolio, including the neural field, project panels, filters, and live regression lab.
+A static portfolio with Home, About, Services, and a ten-component React demo collection. The visual layout follows the user-selected reference at https://siddz.com/; portfolio details, projects, email, and avatar belong to Varun.
 
-## Open locally
-1. Extract this ZIP (do not edit inside the ZIP).
-2. Open the varun-portfolio folder in VS Code.
-3. Double-click index.html to view it in a browser. No installation or build is required.
+## Develop
 
-Optional local server, from this folder if Python is installed:
+- `npm ci`
+- `npm run build` — bundles interactive demos, compiles Tailwind, and generates all pages.
+- `node scripts/serve.mjs` — preview at http://127.0.0.1:5501.
 
-    python -m http.server 5500
+Deploy the repository as a static site. Generated HTML and bundled assets are committed, so the existing static host does not need a Node build step. Routes use directory index files and relative base paths, including deployments beneath a repository path.
 
-On Windows you can also use:
+## Edit
 
-    py -m http.server 5500
+- `src/home.html`, `src/about.html`, `src/services.html`: page content.
+- `scripts/build.mjs`: shared page shell and generated component routes.
+- `src/catalog.json`: component listing and descriptions.
+- `src/demos.jsx`: demos, code/preview UI, installation commands, and prop tables.
+- `src/components/`: reusable component implementations.
+- `style.css`: portfolio and documentation styles.
+- `app.js`: theme, email draft, contribution chart, role slider, and tech stack.
 
-Then open http://localhost:5500. Press Ctrl+C to stop the server.
+Run `npm run build` after editing source pages or components. The build updates registry JSON to match the actual component source.
 
-## What to edit
-- index.html: name, biography, employment, main project descriptions, statistics, links, and section structure.
-- style.css: colors, fonts, spacing, responsive layouts, and visual styling. The Volume 02 section near the bottom contains the enhanced design overrides.
-- app.js: project detail data (projects), extra repository list (archive), neural-field rendering, and page interactions.
-- lab.js: synthetic regression experiment, project filters, and section navigation indicators.
+## Data and integrations
 
-Search for varun9087 to change GitHub links. Main project text appears in both index.html and the projects object in app.js; update both when changing a featured project. Archive filter categories are mapped in lab.js, so update that mapping when reordering or adding archive entries.
+Contact: writevarun2006@gmail.com. The contact form opens a prefilled email draft using `mailto:`; the visitor sends it in their email client. It does not claim delivery or depend on an unconfigured server.
 
-Save an edited file and refresh your browser. Use Ctrl+F5 if an old version remains cached.
+GitHub contributions load from github-contributions-api.jogruber.de for varun9087, with a GitHub link if the service is unavailable. Fonts and technology icons are local. No invented visitor count, music history, booking URL, or social account is displayed. Booking and Spotify require Varun's own account integrations.
 
-## Dependencies and data
-This is plain HTML, CSS, and JavaScript, not React. No npm install, backend, API keys, or account login is required locally. Google Fonts loads DM Sans and Instrument Serif when online; system fonts are used if unavailable. All artwork is generated with CSS, SVG, and canvas, so no image assets are missing.
+## Credits
 
-LeetCode numbers are the supplied October 2026 snapshot, not a live feed. The lab uses synthetic data and does not load the trained GitHub models. GitHub links require internet access.
+The ten reusable React components originate from Siddharth Meena's public siddz-ui registry, https://siddz.com/components. Their original source URLs are recorded in THIRD_PARTY.md and linked on each demo page. Local adaptations add accessible toolbar labels and scope the shiny-text CSS. These components are not presented as originally authored by Varun.
 
-## Hosting and future updates
-Upload these five web files together to a static host, keeping their relative paths. index.html must be the entry point. Local edits do not automatically update the existing hosted portfolio.
+Geist and JetBrains Mono are open-source fonts; license notices are in assets/fonts. Technology icons are from Devicon. The avatar is the image supplied by the user. Sentinel AI screenshots were already in this repository.
 
-The export intentionally excludes service-specific hosting configuration, Git history, and credentials. You can keep your own version history by initializing a new Git repository in this folder.
-
-## Version 3 additions
-Larger and bolder typography, enhanced transitions, regression dataset presets, single-step training, a loss-history chart, and a second interactive neural-network demo.
-
-- experience.js: accessible demo tabs, live 2-3-1 forward propagation, and signal tracing.
-- lab.js: regression training, datasets, loss history, filtering, and section markers.
-- style.css: Volume 03 overrides appear near the bottom.
-
-The neural network uses fixed illustrative weights, not a trained project model. Both demos run entirely in your browser.
+The older `validation/` reports describe the previous design and are not validation results for this version.

@@ -1,0 +1,12 @@
+[
+{"slug":"floating-toolbar","title":"Floating Toolbar","icon":"▣","description":"A floating toolbar with animated hover states, sliding tooltips, and clear selection feedback."},
+{"slug":"filter-selector","title":"Filter Selector","icon":"▽","description":"Select and remove filters as chips move smoothly between the available and selected groups."},
+{"slug":"scroll-progress","title":"Scroll Progress","icon":"▤","description":"Follow a document with an animated progress line that adapts to nested headings."},
+{"slug":"floating-tabs","title":"Floating Tabs","icon":"⊞","description":"A compact tab bar with an animated indicator that follows your selection."},
+{"slug":"confetti-button","title":"Confetti Button","icon":"✣","description":"Celebrate a moment with a burst of confetti or a colorful fireworks effect."},
+{"slug":"scramble-text","title":"Scramble Text","icon":"‹/›","description":"An interactive text effect that scrambles characters before revealing the original words."},
+{"slug":"animated-text-slider","title":"Animated Text Slider","icon":"T↕","description":"A vertical text carousel with smooth transitions for titles, roles, and short messages."},
+{"slug":"shiny-text","title":"Shiny Text","icon":"✧","description":"A subtle light reflection travels across text, with adjustable speed and shimmer width."},
+{"slug":"search-bar","title":"Search Bar","icon":"⌕","description":"A search input with cycling prompts, keyboard shortcuts, and animated placeholder transitions."},
+{"slug":"command-palette","title":"Command Palette","icon":"⌘","description":"Search grouped commands, navigate with your keyboard, and jump directly to an action."}
+]

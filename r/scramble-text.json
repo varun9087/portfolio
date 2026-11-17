@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "scramble-text",
+  "type": "registry:component",
+  "title": "Scramble Text",
+  "description": "An animated text component that creates a hacker-style character scrambling effect on hover, revealing text with a smooth decoding animation.",
+  "files": [
+    {
+      "path": "siddz-ui/scramble-text.jsx",
+      "type": "registry:component",
+      "content": "\"use client\";\r\n\r\nimport { useState, useEffect, useRef } from \"react\";\r\n\r\nexport function ScrambleText({ \r\n  text, \r\n  speed = 30, \r\n  chars = \"abcdefghijklmnopqrstuvwxyz0123456789-\",\r\n  className = \"\"\r\n}) {\r\n  const [displayText, setDisplayText] = useState(text);\r\n  const intervalRef = useRef(null);\r\n  const iterationsRef = useRef(0);\r\n\r\n  const scramble = () => {\r\n    const original = text.split('');\r\n    if (intervalRef.current) {\r\n      clearInterval(intervalRef.current);\r\n      intervalRef.current = null;\r\n    }\r\n\r\n    iterationsRef.current = 0;\r\n    const maxIterations = original.length * 2;\r\n\r\n    intervalRef.current = setInterval(() => {\r\n      iterationsRef.current += 1;\r\n\r\n      const out = original\r\n        .map((ch, i) => {\r\n          if (iterationsRef.current > i * 2) return ch;\r\n          return chars[Math.floor(Math.random() * chars.length)];\r\n        })\r\n        .join('');\r\n\r\n      setDisplayText(out);\r\n\r\n      if (iterationsRef.current >= maxIterations) {\r\n        clearInterval(intervalRef.current);\r\n        intervalRef.current = null;\r\n        setDisplayText(original.join(''));\r\n      }\r\n    }, speed);\r\n  };\r\n\r\n  useEffect(() => {\r\n    return () => {\r\n      if (intervalRef.current) clearInterval(intervalRef.current);\r\n    };\r\n  }, []);\r\n\r\n  return (\r\n    <span \r\n      onMouseEnter={scramble} \r\n      className={`inline-block select-none ${className}`}\r\n    >\r\n      {displayText}\r\n    </span>\r\n  );\r\n}\r\n\r\n"
+    }
+  ],
+  "dependencies": [
+    "react",
+    "framer-motion",
+    "canvas-confetti"
+  ]
+}

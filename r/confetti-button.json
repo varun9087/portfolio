@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "confetti-button",
+  "type": "registry:component",
+  "title": "Confetti Button",
+  "description": "A fun confetti animation component that fires celebratory particles from buttons or anywhere on the page with customizable effects and presets.",
+  "files": [
+    {
+      "path": "siddz-ui/confetti-button.jsx",
+      "type": "registry:component",
+      "content": "\"use client\";\r\n\r\nimport confetti from \"canvas-confetti\";\r\n\r\nconst shootConfetti = (origin) => {\r\n  const count = 200;\r\n  const defaults = {\r\n    origin: origin,\r\n  };\r\n\r\n  function fire(particleRatio, opts) {\r\n    confetti({\r\n      ...defaults,\r\n      ...opts,\r\n      particleCount: Math.floor(count * particleRatio),\r\n    });\r\n  }\r\n\r\n  fire(0.25, { spread: 26, startVelocity: 55 });\r\n  fire(0.2, { spread: 60 });\r\n  fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });\r\n  fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });\r\n  fire(0.1, { spread: 120, startVelocity: 45 });\r\n};\r\n\r\nconst shootFireworks = () => {\r\n  const duration = 1 * 1000;\r\n  const end = Date.now() + duration;\r\n\r\n  const colors = [\"#a786ff\", \"#fd8bbc\", \"#eca184\", \"#f8deb1\"];\r\n\r\n  const frame = () => {\r\n    if (Date.now() > end) return;\r\n\r\n    confetti({\r\n      particleCount: 2,\r\n      angle: 60,\r\n      spread: 55,\r\n      startVelocity: 60,\r\n      origin: { x: 0, y: 0.5 },\r\n      colors,\r\n    });\r\n    confetti({\r\n      particleCount: 2,\r\n      angle: 120,\r\n      spread: 55,\r\n      startVelocity: 60,\r\n      origin: { x: 1, y: 0.5 },\r\n      colors,\r\n    });\r\n\r\n    requestAnimationFrame(frame);\r\n  };\r\n\r\n  frame();\r\n};\r\n\r\nconst confettiEffects = {\r\n  default: shootConfetti,\r\n  fireworks: shootFireworks\r\n};\r\n\r\nexport function ConfettiButton({\r\n  children,\r\n  variant = \"default\",\r\n  className = \"\",\r\n  onClick,\r\n  ...props\r\n}) {\r\n  const handleClick = (e) => {\r\n    const rect = e.currentTarget.getBoundingClientRect();\r\n    const x = (rect.left + rect.width / 2) / window.innerWidth;\r\n    const y = (rect.top + rect.height / 2) / window.innerHeight;\r\n    const origin = { x, y };\r\n\r\n    const effect = confettiEffects[variant] || confettiEffects.default;\r\n    effect(origin);\r\n    onClick?.(e);\r\n  };\r\n\r\n  return (\r\n    <button onClick={handleClick} className={className} {...props}>\r\n      {children}\r\n    </button>\r\n  );\r\n}\r\n\r\n"
+    }
+  ],
+  "dependencies": [
+    "react",
+    "framer-motion",
+    "canvas-confetti"
+  ]
+}
