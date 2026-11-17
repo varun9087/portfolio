@@ -32,7 +32,7 @@ GitHub contributions load from github-contributions-api.jogruber.de for varun908
 
 ## Credits
 
-The ten reusable React components originate from Siddharth Meena's public siddz-ui registry, https://siddz.com/components. Their original source URLs are recorded in THIRD_PARTY.md and linked on each demo page. Local adaptations add accessible toolbar labels and scope the shiny-text CSS. These components are not presented as originally authored by Varun.
+The ten reusable React components originate from Siddharth Meena's public siddz-ui registry, https://siddz.com/components. Their original source URLs are recorded in THIRD_PARTY.md with attribution retained in the repository. Local adaptations add accessible toolbar labels and scope the shiny-text CSS. These components are not presented as originally authored by Varun.
 
 Geist and JetBrains Mono are open-source fonts; license notices are in assets/fonts. Technology icons are from Devicon. The avatar is the image supplied by the user. Sentinel AI screenshots were already in this repository.
 

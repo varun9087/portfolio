@@ -4,7 +4,7 @@
 
 Author: Siddharth Meena. Public component collection: https://siddz.com/components
 
-The reference offers these components for reuse through its Copy & Paste / shadcn registry interface. The component source is retained in `src/components/`, with local changes for accessible toolbar names and scoped shiny-text animation. Source attribution is displayed in the component collection and every detail page.
+The reference offers these components for reuse through its Copy & Paste / shadcn registry interface. The component source is retained in `src/components/`, with local changes for accessible toolbar names and scoped shiny-text animation. Source attribution is retained in this repository; visible credit lines were removed at the owner’s request.
 
 Registry sources:
 - https://siddz.com/r/floating-toolbar.json
