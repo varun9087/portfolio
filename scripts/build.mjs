@@ -20,3 +20,14 @@ for(const c of entries){
  write(`components/${c.slug}/index.html`,page(c.title,`<a class="back mono" href="components/">← Back to Components</a><h1 class="detail-title">${c.title}</h1><p class="detail-description">${c.description}</p><div id="component-demo" data-component="${c.slug}"></div><script type="module" src="assets/demos.js"></script>`,'components',2));
 }
 console.log('Built home, about, services, component collection, and 10 component pages.');
+
+// Publish only the site, not source files or node_modules. Use the same explicit
+// output directory locally and on Vercel instead of framework auto-detection.
+const output = path.resolve('dist');
+if (output !== path.join(process.cwd(), 'dist')) throw new Error('Invalid output directory');
+fs.rmSync(output, {recursive:true, force:true});
+fs.mkdirSync(output, {recursive:true});
+for (const entry of ['index.html','sentinel.html','style.css','app.js','about','services','components','assets','r']) {
+ fs.cpSync(entry, path.join(output, entry), {recursive:true});
+}
+console.log('Packaged static deployment in dist/.');

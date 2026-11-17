@@ -8,7 +8,9 @@ A static portfolio with Home, About, Services, and a ten-component React demo co
 - `npm run build` — bundles interactive demos, compiles Tailwind, and generates all pages.
 - `node scripts/serve.mjs` — preview at http://127.0.0.1:5501.
 
-Deploy the repository as a static site. Generated HTML and bundled assets are committed, so the existing static host does not need a Node build step. Routes use directory index files and relative base paths, including deployments beneath a repository path.
+Vercel uses the checked-in `vercel.json`: the Other framework preset, `npm ci`, `npm run build`, and the `dist` output directory. The build packages only public site files into `dist`; source files and dependencies are excluded. Run `node scripts/check.mjs` after building to verify deployment contents and local links. Routes use directory index files and trailing slashes so relative base paths resolve correctly.
+
+Generated HTML and bundled assets are also committed for static hosts that serve the repository directly.
 
 ## Edit
 
